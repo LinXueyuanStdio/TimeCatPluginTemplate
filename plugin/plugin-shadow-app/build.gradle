@@ -14,8 +14,9 @@ dependencies {
 
 buildscript {
     repositories {
+        maven { url "file://${gradle.ext.localMavenDir.absolutePath}" }
         google()
-        jcenter()
+        mavenCentral()
         maven {
             name = "GitHubPackages"
             url "https://maven.pkg.github.com/shifujun/shadow"

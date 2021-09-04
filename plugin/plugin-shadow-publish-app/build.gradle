@@ -17,8 +17,9 @@ dependencies {
 //这段buildscript配置的dependencies是为了apply plugin: 'com.tencent.shadow.plugin'能找到实现
 buildscript {
     repositories {
+        maven { url "file://${gradle.ext.localMavenDir.absolutePath}" }
         google()
-        jcenter()
+        mavenCentral()
         maven {
             name = "GitHubPackages"
             url "https://maven.pkg.github.com/shifujun/shadow"
