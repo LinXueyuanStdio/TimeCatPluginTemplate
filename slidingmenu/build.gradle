@@ -1,0 +1,5 @@
+apply from: "${project.rootDir}/gradle/library_header.gradle"
+
+dependencies{
+    implementation 'com.android.support:support-fragment:27.0.2'
+}

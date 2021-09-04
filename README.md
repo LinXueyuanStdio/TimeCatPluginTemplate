@@ -1,2 +1,3 @@
-# TimeCatRepoTemplate
-时光猫仓库模板
+# TimeCatPluginTemplate
+
+时光猫插件仓库模板

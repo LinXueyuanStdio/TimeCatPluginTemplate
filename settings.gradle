@@ -1,7 +1,19 @@
-rootProject.name = "TimeCatRepoTemplate"
+rootProject.name = "TimeCatPluginTemplate"
 
 apply from: "context.gradle"
 
 include ':app'
-//TODO include ':template'
-//TODO include ':template:template'
+include ':database'
+include ':plugin-manager'
+include ':plugin:plugin-main'
+include ':plugin:plugin-loader'
+include ':plugin:plugin-runtime'
+include ':plugin:plugin-normal-app'
+include ':plugin:plugin-shadow-app'
+include ':plugin:plugin-shadow-publish-app'
+
+include ':sample-host-lib'
+include ':sample-constant'
+
+include ':slidingmenu'
+include ':pinnedheaderexpandablelistview'

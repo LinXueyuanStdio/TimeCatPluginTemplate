@@ -126,5 +126,10 @@
       <option name="name" value="maven5" />
       <option name="url" value="https://oss.sonatype.org/content/repositories/snapshots" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="GitHubPackages" />
+      <option name="name" value="GitHubPackages" />
+      <option name="url" value="https://maven.pkg.github.com/shifujun/shadow" />
+    </remote-repository>
   </component>
 </project>

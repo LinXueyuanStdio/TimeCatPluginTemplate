@@ -1,9 +1,77 @@
 apply from: "${gradle.ext.localGradleDir}/project/header.gradle"
 
+android {
+    sourceSets {
+        debug {
+            assets.srcDir('build/generated/assets/plugin-manager/debug/')
+            assets.srcDir('build/generated/assets/plugin-zip/debug/')
+        }
+        release {
+            assets.srcDir('build/generated/assets/plugin-manager/release/')
+            assets.srcDir('build/generated/assets/plugin-zip/release/')
+        }
+    }
+}
+
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-//    TODO 为你的库写一个演示 demo
-//    implementation project(':template')
-//    implementation project(':template:template')
+    implementation 'commons-io:commons-io:2.5'//sample-host从assets中复制插件用的
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+
+    implementation "com.tencent.shadow.dynamic:host:$shadow_version"
+    implementation project(':sample-constant')
+    implementation project(':sample-host-lib')
+}
+
+def createCopyTask(projectName, buildType, name, apkName, inputFile, taskName) {
+    def outputFile = file("${getBuildDir()}/generated/assets/${name}/${buildType}/${apkName}")
+    outputFile.getParentFile().mkdirs()
+    return tasks.create("copy${buildType.capitalize()}${name.capitalize()}Task", Copy) {
+        group = 'build'
+        description = "复制${name}到assets中."
+        from(inputFile.getParent()) {
+            include(inputFile.name)
+            rename { outputFile.name }
+        }
+        into(outputFile.getParent())
+
+    }.dependsOn("${projectName}:${taskName}")
+}
+
+def generateAssets(generateAssetsTask, buildType) {
+
+    def moduleName = 'plugin-manager'
+    def pluginManagerApkFile = file(
+            "${project(":plugin-manager").getBuildDir()}" +
+                    "/outputs/apk/${buildType}/" +
+                    "${moduleName}-${buildType}.apk"
+    )
+    generateAssetsTask.dependsOn createCopyTask(
+            ':plugin-manager',
+            buildType,
+            moduleName,
+            'pluginmanager.apk',
+            pluginManagerApkFile,
+            "assemble${buildType.capitalize()}"
+    )
+
+    def pluginZip = file("${getRootProject().getBuildDir()}/plugin-${buildType}.zip")
+    generateAssetsTask.dependsOn createCopyTask(
+            ':plugin:plugin-shadow-app',
+            buildType,
+            'plugin-zip',
+            "plugin-${buildType}.zip",
+            pluginZip,
+            "package${buildType.capitalize()}Plugin"
+    )
+
+
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == "generateDebugAssets") {
+        generateAssets(task, 'debug')
+    }
+    if (task.name == "generateReleaseAssets") {
+        generateAssets(task, 'release')
+    }
 }
