@@ -1,4 +1,4 @@
-apply from: "${gradle.ext.localGradleDir}/project/header.gradle"
+apply from: "${gradle.ext.localGradleDir}/project/plugin_manager_header.gradle"
 
 dependencies {
     implementation "com.tencent.shadow.dynamic:manager:$shadow_version"
