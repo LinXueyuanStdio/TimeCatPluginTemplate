@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import com.timecat.identity.readonly.PluginHub;
 import com.timecat.module.plugin.PluginRouterActivity;
+import com.timecat.module.plugin.database.Plugin;
 
 
 public class MainActivity extends Activity {
@@ -44,7 +45,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.TestHostTheme);
-        AssetsPlugin.getInstance().init(this);
+        Plugin plugin = new Plugin(0, "com.timecat.plugin.assets", 0, "测试插件",
+                1, "1.0.0",
+                1, "1.0.0",
+                "com.tencent.shadow.sample.plugin.app.lib.gallery.splash.SplashActivity"
+        );
+        AssetsPlugin.getInstance().init(this, plugin);
 
         LinearLayout rootView = new LinearLayout(this);
         rootView.setOrientation(LinearLayout.VERTICAL);
