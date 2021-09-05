@@ -26,7 +26,7 @@ import android.view.View;
 
 import com.tencent.shadow.core.manager.installplugin.InstalledPlugin;
 import com.tencent.shadow.dynamic.host.EnterCallback;
-import com.tencent.shadow.sample.constant.Constant;
+import com.timecat.identity.readonly.PluginHub;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -65,20 +65,18 @@ public class SamplePluginManager extends FastPluginManager {
     @Override
     protected String getPluginProcessServiceName(String partKey) {
         if ("plugin-shadow-app".equals(partKey)) {
-            return "com.tencent.shadow.sample.host.PluginProcessPPS";
+            return "com.timecat.module.plugin.container.MainPluginProcessService";
         } else if ("plugin-shadow-app2".equals(partKey)) {
-            return "com.tencent.shadow.sample.host.Plugin2ProcessPPS";//在这里支持多个插件
+            return "com.timecat.module.plugin.container.SecondPluginProcessPPS";//在这里支持多个插件
         } else {
             //如果有默认PPS，可用return代替throw
-            throw new IllegalArgumentException("unexpected plugin load request: " + partKey);
+            return "com.timecat.module.plugin.container.MainPluginProcessService";
         }
     }
 
     @Override
     public void enter(final Context context, long fromId, Bundle bundle, final EnterCallback callback) {
-        if (fromId == Constant.FROM_ID_NOOP) {
-            //do nothing.
-        } else if (fromId == Constant.FROM_ID_START_ACTIVITY) {
+        if (fromId == PluginHub.FROM_ID_START_ACTIVITY) {
             onStartActivity(context, bundle, callback);
         } else {
             throw new IllegalArgumentException("不认识的fromId==" + fromId);
@@ -86,13 +84,13 @@ public class SamplePluginManager extends FastPluginManager {
     }
 
     private void onStartActivity(final Context context, Bundle bundle, final EnterCallback callback) {
-        final String pluginZipPath = bundle.getString(Constant.KEY_PLUGIN_ZIP_PATH);
-        final String partKey = bundle.getString(Constant.KEY_PLUGIN_PART_KEY);
-        final String className = bundle.getString(Constant.KEY_ACTIVITY_CLASSNAME);
+        final String pluginZipPath = bundle.getString(PluginHub.KEY_PLUGIN_ZIP_PATH);
+        final String partKey = bundle.getString(PluginHub.KEY_PLUGIN_PART_KEY);
+        final String className = bundle.getString(PluginHub.KEY_CLASSNAME);
         if (className == null) {
             throw new NullPointerException("className == null");
         }
-        final Bundle extras = bundle.getBundle(Constant.KEY_EXTRAS);
+        final Bundle extras = bundle.getBundle(PluginHub.KEY_EXTRAS);
 
         if (callback != null) {
             final View view = LayoutInflater.from(mCurrentContext).inflate(R.layout.activity_load_plugin, null);

@@ -21,9 +21,9 @@ dependencies {
     implementation 'commons-io:commons-io:2.5'//sample-host从assets中复制插件用的
     implementation 'org.slf4j:slf4j-api:1.7.25'
 
+    api rootProject.ext.timecat["module-plugin"]
 
     api rootProject.ext.timecat["component-CommonStatic"]
-//    api rootProject.ext.timecat["component-CommonResource"]
     api rootProject.ext.timecat["identity-Resource"]
     api rootProject.ext.timecat["component-CommonSDK"]
     api rootProject.ext.timecat["component-SelfService"]
@@ -31,10 +31,8 @@ dependencies {
     api rootProject.ext.timecat["component-SelfRouter"]
     api rootProject.ext.timecat["plugin-agreement-window"]
 
-
     implementation "com.tencent.shadow.dynamic:host:$shadow_version"
-    implementation project(':sample-constant')
-    implementation project(':sample-host-lib')
+    implementation rootProject.ext.timecat["shared-host"]
 }
 
 def createCopyTask(projectName, buildType, name, apkName, inputFile, taskName) {
@@ -64,7 +62,7 @@ def generateAssets(generateAssetsTask, buildType) {
             ':plugin-manager',
             buildType,
             moduleName,
-            'pluginmanager.apk',
+            'plugin-manager.apk',
             pluginManagerApkFile,
             "assemble${buildType.capitalize()}"
     )

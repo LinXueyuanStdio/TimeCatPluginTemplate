@@ -31,15 +31,20 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.tencent.shadow.sample.constant.Constant;
+import com.timecat.identity.readonly.PluginHub;
+import com.timecat.module.plugin.PluginRouterActivity;
 
 
 public class MainActivity extends Activity {
+
+    public static final String PART_KEY_PLUGIN_MAIN_APP = "plugin-shadow-app";
+    public static final String PART_KEY_PLUGIN_ANOTHER_APP = "plugin-shadow-app2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.TestHostTheme);
+        AssetsPlugin.getInstance().init(this);
 
         LinearLayout rootView = new LinearLayout(this);
         rootView.setOrientation(LinearLayout.VERTICAL);
@@ -51,8 +56,8 @@ public class MainActivity extends Activity {
         final Spinner partKeySpinner = new Spinner(this);
         ArrayAdapter<String> partKeysAdapter = new ArrayAdapter<>(this, R.layout.part_key_adapter);
         partKeysAdapter.addAll(
-                Constant.PART_KEY_PLUGIN_MAIN_APP,
-                Constant.PART_KEY_PLUGIN_ANOTHER_APP
+                PART_KEY_PLUGIN_MAIN_APP,
+                PART_KEY_PLUGIN_ANOTHER_APP
         );
         partKeySpinner.setAdapter(partKeysAdapter);
 
@@ -64,13 +69,13 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String partKey = (String) partKeySpinner.getSelectedItem();
-                Intent intent = new Intent(MainActivity.this, PluginLoadActivity.class);
-                intent.putExtra(Constant.KEY_PLUGIN_PART_KEY, partKey);
+                Intent intent = new Intent(MainActivity.this, PluginRouterActivity.class);
+                intent.putExtra(PluginHub.KEY_PLUGIN_PART_KEY, partKey);
                 switch (partKey) {
                     //为了演示多进程多插件，其实两个插件内容完全一样，除了所在进程
-                    case Constant.PART_KEY_PLUGIN_MAIN_APP:
-                    case Constant.PART_KEY_PLUGIN_ANOTHER_APP:
-                        intent.putExtra(Constant.KEY_ACTIVITY_CLASSNAME, "com.tencent.shadow.sample.plugin.app.lib.gallery.splash.SplashActivity");
+                    case PART_KEY_PLUGIN_MAIN_APP:
+                    case PART_KEY_PLUGIN_ANOTHER_APP:
+                        intent.putExtra(PluginHub.KEY_CLASSNAME, "com.tencent.shadow.sample.plugin.app.lib.gallery.splash.SplashActivity");
                         break;
 
                 }
@@ -86,8 +91,6 @@ public class MainActivity extends Activity {
                 requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
-
-
     }
 
     @Override

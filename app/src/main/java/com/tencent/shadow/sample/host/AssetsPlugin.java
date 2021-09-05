@@ -20,6 +20,10 @@ package com.tencent.shadow.sample.host;
 
 import android.content.Context;
 
+import com.timecat.module.plugin.database.Plugin;
+import com.timecat.module.plugin.database.PluginDao;
+import com.timecat.module.plugin.database.PluginDatabase;
+
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -28,62 +32,48 @@ import java.io.InputStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class PluginHelper {
-
-    /**
-     * 动态加载的插件管理apk
-     */
-    public final static String sPluginManagerName = "pluginmanager.apk";
-
-    /**
-     * 动态加载的插件包，里面包含以下几个部分，插件apk，插件框架apk（loader apk和runtime apk）, apk信息配置关系json文件
-     */
-    public final static String sPluginZip = BuildConfig.DEBUG ? "plugin-debug.zip" : "plugin-release.zip";
-
-    public File pluginManagerFile;
-
-    public File pluginZipFile;
-
+public class AssetsPlugin {
     public ExecutorService singlePool = Executors.newSingleThreadExecutor();
 
-    private Context mContext;
+    private static AssetsPlugin sInstance = new AssetsPlugin();
 
-    private static PluginHelper sInstance = new PluginHelper();
-
-    public static PluginHelper getInstance() {
+    public static AssetsPlugin getInstance() {
         return sInstance;
     }
 
-    private PluginHelper() {
+    private AssetsPlugin() {
     }
 
     public void init(Context context) {
-        pluginManagerFile = new File(context.getFilesDir(), sPluginManagerName);
-        pluginZipFile = new File(context.getFilesDir(), sPluginZip);
-
-        mContext = context.getApplicationContext();
-
+        Plugin plugin = new Plugin(0, "com.timecat.plugin.assets", 0, "测试插件",
+                1, "1.0.0",
+                1, "1.0.0"
+        );
         singlePool.execute(new Runnable() {
             @Override
             public void run() {
-                preparePlugin();
+                preparePlugin(context.getApplicationContext(), plugin);
             }
         });
-
     }
 
-    private void preparePlugin() {
+    private static void preparePlugin(Context context, Plugin p) {
+        File pluginManagerFile = p.managerApkFile(context);
+        File pluginZipFile = p.pluginZipFile(context);
         try {
-            InputStream is = mContext.getAssets().open(sPluginManagerName);
+            InputStream is = context.getAssets().open("plugin-manager.apk");
             FileUtils.copyInputStreamToFile(is, pluginManagerFile);
 
-            InputStream zip = mContext.getAssets().open(sPluginZip);
+            InputStream zip = context.getAssets().open(BuildConfig.DEBUG ? "plugin-debug.zip" : "plugin-release.zip");
             FileUtils.copyInputStreamToFile(zip, pluginZipFile);
 
         } catch (IOException e) {
             throw new RuntimeException("从assets中复制apk出错", e);
         }
+        PluginDao dao = PluginDatabase.forFile(context).pluginDao();
+        Plugin existPlugin = dao.get(p.getUuid());
+        if (existPlugin == null) {
+            dao.insert(p);
+        }
     }
-
-
 }

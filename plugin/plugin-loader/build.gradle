@@ -13,7 +13,5 @@ dependencies {
     //下面这行依赖是为了防止在proguard的时候找不到LoaderFactory接口
     compileOnly "com.tencent.shadow.dynamic:host:$shadow_version"
 
-    compileOnly files("${project(":sample-host-lib").getBuildDir()}/outputs/jar/sample-host-lib-debug.jar")
+    compileOnly rootProject.ext.timecat["shared-host-jar"]
 }
-
-preBuild.dependsOn(":sample-host-lib:jarDebugPackage")

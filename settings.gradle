@@ -12,7 +12,6 @@ include ':plugin:plugin-normal-app'
 include ':plugin:plugin-shadow-app'
 include ':plugin:plugin-shadow-publish-app'
 
-include ':sample-host-lib'
 include ':sample-constant'
 
 include ':slidingmenu'
