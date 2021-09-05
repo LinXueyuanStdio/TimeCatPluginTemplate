@@ -67,7 +67,7 @@ public class SampleComponentManager extends ComponentManager {
     public ContainerProviderInfo onBindContainerContentProvider(ComponentName pluginContentProvider) {
         return new ContainerProviderInfo(
                 "com.tencent.shadow.core.runtime.container.PluginContainerContentProvider",
-                "com.tencent.shadow.contentprovider.authority.dynamic");
+                "com.tencent.shadow.sample.host.contentprovider.authority.dynamic");
     }
     public static final String PART_KEY_PLUGIN_MAIN_APP = "plugin-shadow-app";
 

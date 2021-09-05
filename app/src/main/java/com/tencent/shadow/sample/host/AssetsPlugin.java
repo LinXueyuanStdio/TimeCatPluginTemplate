@@ -47,7 +47,8 @@ public class AssetsPlugin {
     public void init(Context context) {
         Plugin plugin = new Plugin(0, "com.timecat.plugin.assets", 0, "测试插件",
                 1, "1.0.0",
-                1, "1.0.0"
+                1, "1.0.0",
+                "com.tencent.shadow.sample.plugin.app.lib.gallery.splash.SplashActivity"
         );
         singlePool.execute(new Runnable() {
             @Override
