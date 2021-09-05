@@ -90,3 +90,6 @@ tasks.whenTaskAdded { task ->
         generateAssets(task, 'release')
     }
 }
+
+
+

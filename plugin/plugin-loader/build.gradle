@@ -1,4 +1,4 @@
-apply from: "${gradle.ext.localGradleDir}/project/plugin_loader_header.gradle"
+apply from: "${gradle.ext.localGradleDir}/plugin/plugin_loader_header.gradle"
 apply plugin: 'kotlin-android'
 
 dependencies {
