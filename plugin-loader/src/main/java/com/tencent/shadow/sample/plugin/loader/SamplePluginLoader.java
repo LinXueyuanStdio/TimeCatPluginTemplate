@@ -19,21 +19,9 @@
 package com.tencent.shadow.sample.plugin.loader;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.res.Resources;
 
-import com.tencent.shadow.core.common.InstalledApk;
-import com.tencent.shadow.core.load_parameters.LoadParameters;
 import com.tencent.shadow.core.loader.ShadowPluginLoader;
-import com.tencent.shadow.core.loader.classloaders.PluginClassLoader;
-import com.tencent.shadow.core.loader.exceptions.LoadPluginException;
-import com.tencent.shadow.core.loader.infos.PluginParts;
 import com.tencent.shadow.core.loader.managers.ComponentManager;
-import com.timecat.plugin.shared.LoadPluginCallback;
-
-import java.util.concurrent.Future;
-
-import static android.content.pm.PackageManager.GET_META_DATA;
 
 public class SamplePluginLoader extends ShadowPluginLoader {
 

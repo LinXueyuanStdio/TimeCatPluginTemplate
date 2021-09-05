@@ -50,7 +50,7 @@ def createDuplicateApkTask(buildType) {
         }
         into(apkDir)
 
-    }.dependsOn(":plugin:plugin-shadow-app:assemble${buildType.capitalize()}")
+    }.dependsOn(":plugin-shadow-app:assemble${buildType.capitalize()}")
 }
 
 tasks.whenTaskAdded { task ->
@@ -75,54 +75,54 @@ shadow {
     packagePlugin {
         pluginTypes {
             debug {
-                loaderApkConfig = new Tuple2('plugin-loader-debug.apk', ':plugin:plugin-loader:assembleDebug')
-                runtimeApkConfig = new Tuple2('plugin-runtime-debug.apk', ':plugin:plugin-runtime:assembleDebug')
+                loaderApkConfig = new Tuple2('plugin-loader-debug.apk', ':plugin-loader:assembleDebug')
+                runtimeApkConfig = new Tuple2('plugin-runtime-debug.apk', ':plugin-runtime:assembleDebug')
                 pluginApks {
                     pluginApk1 {
                         businessName = 'plugin-shadow-app'
                         partKey = 'plugin-shadow-app'
-                        buildTask = ':plugin:plugin-shadow-app:assembleDebug'
+                        buildTask = ':plugin-shadow-app:assembleDebug'
                         apkName = 'plugin-shadow-app-debug.apk'
-                        apkPath = 'plugin/plugin-shadow-app/build/outputs/apk/debug/plugin-shadow-app-debug.apk'
+                        apkPath = 'plugin-shadow-app/build/outputs/apk/debug/plugin-shadow-app-debug.apk'
                         hostWhiteList = ["com.timecat.plugin.shared"]
                     }
                     pluginApk2 {
                         businessName = 'plugin-shadow-app2'
                         partKey = 'plugin-shadow-app2'
-                        buildTask = ':plugin:plugin-shadow-app:assembleDebug'
+                        buildTask = ':plugin-shadow-app:assembleDebug'
                         apkName = 'plugin-shadow-app-debug2.apk'
-                        apkPath = 'plugin/plugin-shadow-app/build/outputs/apk/debug/plugin-shadow-app-debug2.apk'
+                        apkPath = 'plugin-shadow-app/build/outputs/apk/debug/plugin-shadow-app-debug2.apk'
                         hostWhiteList = ["com.timecat.plugin.shared"]
                     }
                 }
             }
 
             release {
-                loaderApkConfig = new Tuple2('plugin-loader-release.apk', ':plugin:plugin-loader:assembleRelease')
-                runtimeApkConfig = new Tuple2('plugin-runtime-release.apk', ':plugin:plugin-runtime:assembleRelease')
+                loaderApkConfig = new Tuple2('plugin-loader-release.apk', ':plugin-loader:assembleRelease')
+                runtimeApkConfig = new Tuple2('plugin-runtime-release.apk', ':plugin-runtime:assembleRelease')
                 pluginApks {
                     pluginApk1 {
                         businessName = 'plugin-shadow-app'
                         partKey = 'plugin-shadow-app'
-                        buildTask = ':plugin:plugin-shadow-app:assembleRelease'
+                        buildTask = ':plugin-shadow-app:assembleRelease'
                         apkName = 'plugin-shadow-app-release.apk'
-                        apkPath = 'plugin/plugin-shadow-app/build/outputs/apk/release/plugin-shadow-app-release.apk'
+                        apkPath = 'plugin-shadow-app/build/outputs/apk/release/plugin-shadow-app-release.apk'
                         hostWhiteList = ["com.timecat.plugin.shared"]
                     }
                     pluginApk2 {
                         businessName = 'plugin-shadow-app2'
                         partKey = 'plugin-shadow-app2'
-                        buildTask = ':plugin:plugin-shadow-app:assembleRelease'
+                        buildTask = ':plugin-shadow-app:assembleRelease'
                         apkName = 'plugin-shadow-app-release2.apk'
-                        apkPath = 'plugin/plugin-shadow-app/build/outputs/apk/release/plugin-shadow-app-release2.apk'
+                        apkPath = 'plugin-shadow-app/build/outputs/apk/release/plugin-shadow-app-release2.apk'
                         hostWhiteList = ["com.timecat.plugin.shared"]
                     }
                 }
             }
         }
 
-        loaderApkProjectPath = 'plugin/plugin-loader'
-        runtimeApkProjectPath = 'plugin/plugin-runtime'
+        loaderApkProjectPath = 'plugin-loader'
+        runtimeApkProjectPath = 'plugin-runtime'
 
         archiveSuffix = System.getenv("PluginSuffix") ?: ""
         archivePrefix = 'plugin'

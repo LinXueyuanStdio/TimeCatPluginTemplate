@@ -47,7 +47,7 @@ task publish_plugin_to_dist {
     )
     def pluginZip = file("${getRootProject().getBuildDir()}/plugin-${buildType}.zip")
     dependsOn createCopyTask(
-            ':plugin:plugin-shadow-app',
+            ':plugin-shadow-app',
             buildType,
             PUBLISH_PLUGIN_VERSION,
             'plugin-zip',
