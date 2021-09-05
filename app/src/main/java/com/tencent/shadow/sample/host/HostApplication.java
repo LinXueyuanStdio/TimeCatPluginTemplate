@@ -35,30 +35,28 @@ import java.io.File;
 
 import static android.os.Process.myPid;
 
-public class HostApplication extends Application {
+public class HostApplication {
     private static HostApplication sApp;
 
     private PluginManager mPluginManager;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+    public void onCreate(Context context) {
         sApp = this;
 
         detectNonSdkApiUsageOnAndroidP();
         setWebViewDataDirectorySuffix();
         LoggerFactory.setILoggerFactory(new AndroidLogLoggerFactory());
 
-        if (isProcess(this, ":plugin")) {
+        if (isProcess(context, ":plugin")) {
             //在全动态架构中，Activity组件没有打包在宿主而是位于被动态加载的runtime，
             //为了防止插件crash后，系统自动恢复crash前的Activity组件，此时由于没有加载runtime而发生classNotFound异常，导致二次crash
             //因此这里恢复加载上一次的runtime
-            DynamicRuntime.recoveryRuntime(this);
+            DynamicRuntime.recoveryRuntime(context);
         }
 
-        PluginHelper.getInstance().init(this);
+        PluginHelper.getInstance().init(context);
 
-        HostUiLayerProvider.init(this);
+        HostUiLayerProvider.init(context);
     }
     private static void setWebViewDataDirectorySuffix(){
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {

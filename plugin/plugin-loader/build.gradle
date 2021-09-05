@@ -1,8 +1,9 @@
 apply from: "${gradle.ext.localGradleDir}/project/plugin_loader_header.gradle"
+apply plugin: 'kotlin-android'
 
 dependencies {
-    implementation "com.tencent.shadow.core:loader:$shadow_version"
-    implementation "com.tencent.shadow.dynamic:loader:$shadow_version"
+//    implementation "com.tencent.shadow.core:loader:$shadow_version"
+//    implementation "com.tencent.shadow.dynamic:loader:$shadow_version"
     implementation "com.tencent.shadow.dynamic:loader-impl:$shadow_version"
     implementation project(':sample-constant')
 
