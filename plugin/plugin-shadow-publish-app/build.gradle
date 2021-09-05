@@ -44,8 +44,8 @@ shadow {
     packagePlugin {
         pluginTypes {
             debug {
-                loaderApkConfig = new Tuple2('sample-loader-debug.apk', ':plugin:plugin-loader:assembleDebug')
-                runtimeApkConfig = new Tuple2('sample-runtime-debug.apk', ':plugin:plugin-runtime:assembleDebug')
+                loaderApkConfig = new Tuple2('plugin-loader-debug.apk', ':plugin:plugin-loader:assembleDebug')
+                runtimeApkConfig = new Tuple2('plugin-runtime-debug.apk', ':plugin:plugin-runtime:assembleDebug')
                 pluginApks {
                     pluginApk1 {
                         businessName = 'sample-plugin'//businessName相同的插件，context获取的Dir是相同的。businessName留空，表示和宿主相同业务，直接使用宿主的Dir。
@@ -58,8 +58,8 @@ shadow {
             }
 
             release {
-                loaderApkConfig = new Tuple2('sample-loader-release.apk', ':plugin:plugin-loader:assembleRelease')
-                runtimeApkConfig = new Tuple2('sample-runtime-release.apk', ':plugin:plugin-runtime:assembleRelease')
+                loaderApkConfig = new Tuple2('plugin-loader-release.apk', ':plugin:plugin-loader:assembleRelease')
+                runtimeApkConfig = new Tuple2('plugin-runtime-release.apk', ':plugin:plugin-runtime:assembleRelease')
                 pluginApks {
                     pluginApk1 {
                         businessName = 'demo'

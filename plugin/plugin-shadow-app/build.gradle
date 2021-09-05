@@ -31,7 +31,10 @@ buildscript {
     }
 
     dependencies {
+        classpath "com.tencent.shadow.core:runtime:$shadow_version"
+        classpath "com.tencent.shadow.core:activity-container:$shadow_version"
         classpath "com.tencent.shadow.core:gradle-plugin:$shadow_version"
+        classpath 'org.javassist:javassist:3.22.0-GA'
     }
 }
 
@@ -72,8 +75,8 @@ shadow {
     packagePlugin {
         pluginTypes {
             debug {
-                loaderApkConfig = new Tuple2('sample-loader-debug.apk', ':plugin:plugin-loader:assembleDebug')
-                runtimeApkConfig = new Tuple2('sample-runtime-debug.apk', ':plugin:plugin-runtime:assembleDebug')
+                loaderApkConfig = new Tuple2('plugin-loader-debug.apk', ':plugin:plugin-loader:assembleDebug')
+                runtimeApkConfig = new Tuple2('plugin-runtime-debug.apk', ':plugin:plugin-runtime:assembleDebug')
                 pluginApks {
                     pluginApk1 {
                         businessName = 'plugin-shadow-app'
@@ -95,8 +98,8 @@ shadow {
             }
 
             release {
-                loaderApkConfig = new Tuple2('sample-loader-release.apk', ':plugin:plugin-loader:assembleRelease')
-                runtimeApkConfig = new Tuple2('sample-runtime-release.apk', ':plugin:plugin-runtime:assembleRelease')
+                loaderApkConfig = new Tuple2('plugin-loader-release.apk', ':plugin:plugin-loader:assembleRelease')
+                runtimeApkConfig = new Tuple2('plugin-runtime-release.apk', ':plugin:plugin-runtime:assembleRelease')
                 pluginApks {
                     pluginApk1 {
                         businessName = 'plugin-shadow-app'

@@ -1,6 +1,10 @@
 apply from: "${gradle.ext.localGradleDir}/project/header.gradle"
 
 android {
+    defaultConfig {
+        applicationId project.SAMPLE_HOST_APP_APPLICATION_ID
+    }
+
     sourceSets {
         debug {
             assets.srcDir('build/generated/assets/plugin-manager/debug/')
@@ -16,6 +20,17 @@ android {
 dependencies {
     implementation 'commons-io:commons-io:2.5'//sample-host从assets中复制插件用的
     implementation 'org.slf4j:slf4j-api:1.7.25'
+
+
+    api rootProject.ext.timecat["component-CommonStatic"]
+//    api rootProject.ext.timecat["component-CommonResource"]
+    api rootProject.ext.timecat["identity-Resource"]
+    api rootProject.ext.timecat["component-CommonSDK"]
+    api rootProject.ext.timecat["component-SelfService"]
+    api rootProject.ext.timecat["component-SelfData"]
+    api rootProject.ext.timecat["component-SelfRouter"]
+    api rootProject.ext.timecat["plugin-agreement-window"]
+
 
     implementation "com.tencent.shadow.dynamic:host:$shadow_version"
     implementation project(':sample-constant')

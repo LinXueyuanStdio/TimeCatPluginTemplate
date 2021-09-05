@@ -18,19 +18,13 @@
 
 package com.tencent.shadow.sample.plugin.app.lib.usecases.packagemanager;
 
-import android.content.ComponentName;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import android.view.View;
 import android.widget.TextView;
 
-import com.tencent.shadow.sample.plugin.app.lib.R;
 import com.tencent.shadow.sample.plugin.app.lib.gallery.BaseActivity;
 import com.tencent.shadow.sample.plugin.app.lib.gallery.cases.entity.UseCase;
+
+import androidx.annotation.Nullable;
 
 public class TestPackageManagerActivity extends BaseActivity {
 
@@ -56,41 +50,41 @@ public class TestPackageManagerActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_packagemanager);
-        mTvTextView = findViewById(R.id.text);
+//        setContentView(R.layout.layout_packagemanager);
+//        mTvTextView = findViewById(R.id.text);
     }
 
 
-    public void getApplicationInfo(View view){
-        try {
-            ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(getPackageName(),0);
-            mTvTextView.setText("ApplicationInfo className:"+applicationInfo.className+
-                    "\nnativeLibraryDir:"+applicationInfo.nativeLibraryDir
-            +"\nmetaData:"+applicationInfo.metaData);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public void getActivityInfo(View view){
-        try {
-            ActivityInfo activityInfo = getPackageManager().getActivityInfo(new ComponentName(this,this.getClass()),0);
-            mTvTextView.setText("activityInfo name:"+activityInfo.name
-                    +"\npackageName:"+activityInfo.packageName);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public void getPackageInfo(View view){
-        try {
-            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(),0);
-            mTvTextView.setText("packageInfo versionName:"+packageInfo.versionName
-                    +"\nversionCode:"+packageInfo.versionCode);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void getApplicationInfo(View view){
+//        try {
+//            ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(getPackageName(),0);
+//            mTvTextView.setText("ApplicationInfo className:"+applicationInfo.className+
+//                    "\nnativeLibraryDir:"+applicationInfo.nativeLibraryDir
+//            +"\nmetaData:"+applicationInfo.metaData);
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//
+//    public void getActivityInfo(View view){
+//        try {
+//            ActivityInfo activityInfo = getPackageManager().getActivityInfo(new ComponentName(this,this.getClass()),0);
+//            mTvTextView.setText("activityInfo name:"+activityInfo.name
+//                    +"\npackageName:"+activityInfo.packageName);
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//
+//    public void getPackageInfo(View view){
+//        try {
+//            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(),0);
+//            mTvTextView.setText("packageInfo versionName:"+packageInfo.versionName
+//                    +"\nversionCode:"+packageInfo.versionCode);
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

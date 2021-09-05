@@ -2,7 +2,10 @@ apply from: "${gradle.ext.localGradleDir}/project/plugin_manager_header.gradle"
 
 dependencies {
     implementation "com.tencent.shadow.dynamic:manager:$shadow_version"
+    implementation "com.tencent.shadow.core:manager:$shadow_version"
+    implementation "com.tencent.shadow.dynamic:loader:$shadow_version"
+    implementation project(':sample-constant')
+
     compileOnly "com.tencent.shadow.core:common:$shadow_version"
     compileOnly "com.tencent.shadow.dynamic:host:$shadow_version"
-    implementation project(':sample-constant')
 }

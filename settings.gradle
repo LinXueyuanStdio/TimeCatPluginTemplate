@@ -10,7 +10,7 @@ include ':plugin:plugin-loader'
 include ':plugin:plugin-runtime'
 include ':plugin:plugin-normal-app'
 include ':plugin:plugin-shadow-app'
-include ':plugin:plugin-shadow-publish-app'
+//include ':plugin:plugin-shadow-publish-app'
 
 include ':sample-host-lib'
 include ':sample-constant'
