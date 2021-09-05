@@ -19,29 +19,25 @@ package com.tencent.shadow.sample.host
 
 import android.Manifest
 import android.app.Activity
-import android.os.Bundle
-import com.tencent.shadow.sample.host.R
-import com.tencent.shadow.sample.host.AssetsPlugin
 import android.content.Intent
-import com.timecat.module.plugin.PluginRouterActivity
-import com.timecat.identity.readonly.PluginHub
-import android.os.Build
 import android.content.pm.PackageManager
+import android.os.Build
+import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.timecat.identity.readonly.PluginHub
 import com.timecat.module.plugin.PluginCloudActivity
+import com.timecat.module.plugin.PluginRouterActivity
 import com.timecat.module.plugin.PluginUpdateActivity
 import com.timecat.module.plugin.database.Plugin
 import com.xiaojinzi.component.impl.*
-import java.lang.RuntimeException
 
 class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.TestHostTheme)
         val plugin = Plugin(
             0, "com.timecat.plugin.assets", 0, "测试插件",
             1, "1.0.0",
@@ -54,31 +50,26 @@ class MainActivity : Activity() {
         rootView.orientation = LinearLayout.VERTICAL
 
         val infoTextView = TextView(this)
-        infoTextView.setText(R.string.main_activity_info)
+        infoTextView.setText(
+            "这是一个全动态的测试程序，插件管理（test-dynamic-manager）,\n" +
+                "        插件框架（test-dynamic-loader及test-dynamic-runtime），\n" +
+                "        以及插件本身,都是动态加载的"
+        )
         rootView.addView(infoTextView)
 
-        val partKeySpinner = Spinner(this)
-        val partKeysAdapter = ArrayAdapter<String>(this, R.layout.part_key_adapter)
-        partKeysAdapter.addAll(
-            PART_KEY_PLUGIN_MAIN_APP,
-            PART_KEY_PLUGIN_ANOTHER_APP
-        )
-        partKeySpinner.adapter = partKeysAdapter
-        rootView.addView(partKeySpinner)
-
-        val startPluginButton = Button(this)
-        startPluginButton.setText(R.string.start_plugin)
-        startPluginButton.setOnClickListener {
-            val partKey = partKeySpinner.selectedItem as String
+        fun startByPartKey(partKey: String) {
             val intent = Intent(this@MainActivity, PluginRouterActivity::class.java)
             intent.putExtra(PluginHub.KEY_PLUGIN_PART_KEY, partKey)
             intent.putExtra("plugin", plugin)
-            when (partKey) {
-                PART_KEY_PLUGIN_MAIN_APP, PART_KEY_PLUGIN_ANOTHER_APP -> intent.putExtra(PluginHub.KEY_CLASSNAME, "com.tencent.shadow.sample.plugin.app.lib.gallery.splash.SplashActivity")
-            }
+            intent.putExtra(PluginHub.KEY_CLASSNAME, "com.tencent.shadow.sample.plugin.app.lib.gallery.splash.SplashActivity")
             startActivity(intent)
         }
-        rootView.addView(startPluginButton)
+        rootView.addView(createButton("启动插件 ${PART_KEY_PLUGIN_MAIN_APP}") {
+            startByPartKey(PART_KEY_PLUGIN_MAIN_APP)
+        })
+        rootView.addView(createButton("启动插件 ${PART_KEY_PLUGIN_ANOTHER_APP}") {
+            startByPartKey(PART_KEY_PLUGIN_ANOTHER_APP)
+        })
 
         rootView.addView(createButton("本地已安装插件") {
             startActivity(Intent(this, PluginUpdateActivity::class.java))
@@ -148,6 +139,7 @@ class MainActivity : Activity() {
                 }
             })
     }
+
     companion object {
         const val PART_KEY_PLUGIN_MAIN_APP = "plugin-shadow-app"
         const val PART_KEY_PLUGIN_ANOTHER_APP = "plugin-shadow-app2"
