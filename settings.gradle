@@ -12,7 +12,5 @@ include ':plugin:plugin-normal-app'
 include ':plugin:plugin-shadow-app'
 include ':plugin:plugin-shadow-publish-app'
 
-include ':sample-constant'
-
 include ':slidingmenu'
 include ':pinnedheaderexpandablelistview'

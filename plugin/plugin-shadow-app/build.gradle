@@ -84,7 +84,7 @@ shadow {
                         buildTask = ':plugin:plugin-shadow-app:assembleDebug'
                         apkName = 'plugin-shadow-app-debug.apk'
                         apkPath = 'plugin/plugin-shadow-app/build/outputs/apk/debug/plugin-shadow-app-debug.apk'
-                        hostWhiteList = ["com.tencent.shadow.sample.host.lib"]
+                        hostWhiteList = ["com.timecat.plugin.shared"]
                     }
                     pluginApk2 {
                         businessName = 'plugin-shadow-app2'
@@ -92,7 +92,7 @@ shadow {
                         buildTask = ':plugin:plugin-shadow-app:assembleDebug'
                         apkName = 'plugin-shadow-app-debug2.apk'
                         apkPath = 'plugin/plugin-shadow-app/build/outputs/apk/debug/plugin-shadow-app-debug2.apk'
-                        hostWhiteList = ["com.tencent.shadow.sample.host.lib"]
+                        hostWhiteList = ["com.timecat.plugin.shared"]
                     }
                 }
             }
@@ -107,7 +107,7 @@ shadow {
                         buildTask = ':plugin:plugin-shadow-app:assembleRelease'
                         apkName = 'plugin-shadow-app-release.apk'
                         apkPath = 'plugin/plugin-shadow-app/build/outputs/apk/release/plugin-shadow-app-release.apk'
-                        hostWhiteList = ["com.tencent.shadow.sample.host.lib"]
+                        hostWhiteList = ["com.timecat.plugin.shared"]
                     }
                     pluginApk2 {
                         businessName = 'plugin-shadow-app2'
@@ -115,7 +115,7 @@ shadow {
                         buildTask = ':plugin:plugin-shadow-app:assembleRelease'
                         apkName = 'plugin-shadow-app-release2.apk'
                         apkPath = 'plugin/plugin-shadow-app/build/outputs/apk/release/plugin-shadow-app-release2.apk'
-                        hostWhiteList = ["com.tencent.shadow.sample.host.lib"]
+                        hostWhiteList = ["com.timecat.plugin.shared"]
                     }
                 }
             }
