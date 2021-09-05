@@ -67,9 +67,6 @@ public class AssetsPlugin {
             throw new RuntimeException("从assets中复制apk出错", e);
         }
         PluginDao dao = PluginDatabase.forFile(context).pluginDao();
-        Plugin existPlugin = dao.get(p.getUuid());
-        if (existPlugin == null) {
-            dao.insert(p);
-        }
+        dao.replace(p);
     }
 }

@@ -71,16 +71,22 @@
     <application
         android:name="com.timecat.extend.arms.BaseApplication"
         android:allowBackup="true"
-        android:label="Shadow Dyanamic测试宿主App"
-        android:theme="@android:style/Theme.DeviceDefault"
+        android:supportsRtl="true"
+        android:theme="@style/ThemeLight"
         android:usesCleartextTraffic="true"
-        tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name="com.tencent.shadow.sample.host.MainActivity">
+        tools:replace="theme,allowBackup,supportsRtl,name">
+        <activity
+            android:name="com.tencent.shadow.sample.host.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+            android:hardwareAccelerated="false"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
