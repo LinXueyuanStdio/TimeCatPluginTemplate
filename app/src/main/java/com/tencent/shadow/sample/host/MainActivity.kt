@@ -51,9 +51,9 @@ class MainActivity : Activity() {
 
         val infoTextView = TextView(this)
         infoTextView.setText(
-            "这是一个全动态的测试程序，插件管理（test-dynamic-manager）,\n" +
-                "        插件框架（test-dynamic-loader及test-dynamic-runtime），\n" +
-                "        以及插件本身,都是动态加载的"
+            "这是一个全动态的测试程序，插件管理（test-dynamic-manager）," +
+                "插件框架（test-dynamic-loader及test-dynamic-runtime），" +
+                "以及插件本身,都是动态加载的"
         )
         rootView.addView(infoTextView)
 
@@ -114,6 +114,7 @@ class MainActivity : Activity() {
     private fun createButton(name: String): Button {
         val button = Button(this)
         button.text = name
+        button.isAllCaps = false
         val layoutParams = LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
